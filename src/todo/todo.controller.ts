@@ -1,4 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
 @Controller('todo')
-export class TodoController {}
+export class TodoController {
+  @Get('/:title?')
+  getAllTodo(@Param('title')title:string = '') {
+    return `Todo Title ${title}`;
+  }
+}
