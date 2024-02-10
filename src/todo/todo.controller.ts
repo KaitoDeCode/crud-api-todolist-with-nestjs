@@ -4,14 +4,20 @@ import { TodoService } from './todo.service';
 @Controller('todo')
 export class TodoController {
   
-  private todoService : TodoService;
-  constructor(todoService : TodoService){
+  constructor(
+   private todoService : TodoService
+){
     this.todoService = todoService;
   }
 
-  @Get('/:title?')
-  getAllTodo(@Param('title')title:string = '') {
+  @Get()
+  getAllTodo() {
     return this.todoService.getAllTodos();
+  }
+
+  @Post()
+  createTodo(@Body() payload:any){
+    return this.todoService.createTodo(payload.id,payload.title,payload.content)
   }
 
 }
