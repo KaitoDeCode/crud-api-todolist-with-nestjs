@@ -17,7 +17,7 @@ export class TodoController {
 
   @Post()
   createTodo(@Body() payload:any){
-    return this.todoService.createTodo(payload.id,payload.title,payload.content)
+    return this.todoService.createTodo(payload.title,payload.content)
   }
 
 }

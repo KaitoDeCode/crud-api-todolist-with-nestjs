@@ -1,15 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class TodoService {
   private todos: object[] = [
     {
-      id: 1,
-      title: 'Belajar Flutter',
-      content: 'Belajar Flutter bareng adi',
-    },
-    {
-      id: 2,
+      id: uuidv4(),
       title: 'Belajar Flutter',
       content: 'Belajar Flutter bareng adi',
     },
@@ -19,13 +15,12 @@ export class TodoService {
     return this.todos;
   }
 
-  createTodo(id: number, title: string, content: string): object {
+  createTodo(title: string, content: string): object {
     const data: object = {
-      id,
+      id: uuidv4(),
       title,
       content,
     };
-
     this.todos.push(data);
     return this.todos;
   }
