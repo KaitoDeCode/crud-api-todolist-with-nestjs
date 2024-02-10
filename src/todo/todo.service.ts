@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class TodoService {
-  private todos: object[] = [
+  private todos: any[] = [
     {
       id: uuidv4(),
       title: 'Belajar Flutter',
@@ -23,5 +23,21 @@ export class TodoService {
     };
     this.todos.push(data);
     return this.todos;
+  }
+
+  updateTodo(id: string, title: string, content: string): object {
+    const todo = this.findTodoByUuid(id);
+    this.todos[todo].title = title;
+    this.todos[todo].content = content;
+    return this.todos;
+  }
+
+  private findTodoByUuid(id: string) {
+    const todo = this.todos.findIndex((todo) => todo.id === id);
+    if (todo === -1) {
+      throw new NotFoundException(`Books with id ${id} not found`);
+    }
+
+    return todo;
   }
 }
