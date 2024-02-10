@@ -32,6 +32,12 @@ export class TodoService {
     return this.todos;
   }
 
+  destroyTodo(id: string): object {
+    const todo = this.findTodoByUuid(id);
+    delete this.todos[todo];
+    return this.todos;
+  }
+
   private findTodoByUuid(id: string) {
     const todo = this.todos.findIndex((todo) => todo.id === id);
     if (todo === -1) {
